@@ -1,10 +1,17 @@
+import './App.css'
+
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { onAuthStateChanged } from 'firebase/auth'
+
+import { useState, useEffect } from 'react'
+import { userAuthentication } from './hooks/userAuthentication'
+
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+
 import Home from './pages/Home/Home'
 import Login from './pages/Login/Login'
 import Register from './pages/Register/Register'
-import './App.css'
 
 function App() {
 
