@@ -14,7 +14,7 @@ const CreatePost = () => {
     const navigate = useNavigate();
     const{insertDocument, response} = useInsertDocument('posts');
 
-    const handleSubmit = async (e) => {
+    const handleSubmit =  (e) => {
         e.preventDefault();
         setFormError('');
  
@@ -30,17 +30,24 @@ const CreatePost = () => {
             setFormError('Por favor, preencha todos os campos!');
             return;
         }
-
-        const post = {
+        console.log({
             title,
             image,
             body,
             tags: tagsArray,
             uid: user.uid,
             createdBy: user.displayName,
-        };
+        });
 
-        await insertDocument(post);
+        insertDocument({
+            title,
+            image,
+            body,
+            tags: tagsArray,
+            uid: user.uid,
+            createdBy: user.displayName,
+        });
+
 
         navigate('/');
     }
@@ -98,7 +105,9 @@ const CreatePost = () => {
                 {response.loading && (
                     <button className="btn" disabled>Aguarde...</button>
                 )}
-                {formError && <p className="error">{formError}</p>}
+                {(response.error || formError) && (<p className="error">{response.error || formError}</p>
+            )}
             </form>
         </div>
-    );
+    )}
+    export default CreatePost;
