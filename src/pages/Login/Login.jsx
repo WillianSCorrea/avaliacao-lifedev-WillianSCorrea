@@ -1,7 +1,7 @@
 import styles from './Login.module.css'
 import { useEffect, useState } from 'react'
 import { useAuthentication } from '../../hooks/useAuthentication'
-
+import { Link } from 'react-router-dom'
 
 const Login = () => {
     const [email, setEmail] = useState("")
@@ -62,6 +62,9 @@ const Login = () => {
                 {loading && <button className='btn' disabled>Aguarde... </button>}
                 {error && <p>{error}</p>}
             </form>
+            <Link to="/forgot-password" style={{ marginTop: '1rem' }}>
+                Esqueceu sua senha?
+            </Link>
         </div>
     )
 }

@@ -1,31 +1,40 @@
-import { useState, useEffect } from "react"
-import { db } from "../firebase/config"
-import { doc, getDoc } from "firebase/firestore"
+import { useState, useEffect } from 'react';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from '../firebase/config';
 
 export const useFetchDocument = (docCollection, id) => {
-    const [document, setDocument] = useState(null)
-    const [error, setError] = useState(null)
-    const [loading, setLoading] = useState(true)
-    
-    useEffect(() => {
-        const loadDocument = async () => {
-        try {
-            const docRef = await doc(db, docCollection, id)
-            const docSnap = await getDoc(docRef)
-    
-            
-            setDocument(docSnap.data())
-            
-        } catch (error) {
-            console.error(error)
-            setError(error.message)
-        } finally {
-            setLoading(false)
+  const [document, setDocument] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchDocument = async () => {
+      if (!id || !docCollection) {
+        setError('ID ou coleção não fornecidos');
+        return;
+      }
+
+      setLoading(true);
+
+      try {
+        const docRef = doc(db, docCollection, id);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+          setDocument({ id: docSnap.id, ...docSnap.data() });
+        } else {
+          setError('Documento não encontrado');
         }
-        }
-    
-        loadDocument()
-    }, [docCollection, id])
-    
-    return { document, loading, error }
-}
+      } catch (error) {
+        console.error('Erro ao buscar documento:', error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDocument();
+  }, [docCollection, id]);
+
+  return { document, loading, error };
+};

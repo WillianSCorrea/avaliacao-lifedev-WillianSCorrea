@@ -1,8 +1,11 @@
-import "./CreatePost.module.css";
-import{ useState } from 'react';
-import {useAuthValue} from '../../context/AuthContext';
-import {useNavigate} from 'react-router-dom';
-import {useInsertDocument} from '../../hooks/useInsertDocument';
+
+
+    import "./CreatePost.module.css";
+import { useState } from 'react';
+import { useAuthValue } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { useInsertDocument } from '../../hooks/useInsertDocument';
+import { serverTimestamp } from 'firebase/firestore'; // Importe aqui
 
 const CreatePost = () => {
     const[title, setTitle] = useState('');
@@ -14,43 +17,44 @@ const CreatePost = () => {
     const navigate = useNavigate();
     const{insertDocument, response} = useInsertDocument('posts');
 
-    const handleSubmit =  (e) => {
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setFormError('');
- 
+
         try {
             new URL(image);
         } catch (error) {
-            setFormError('A imagem precisa ser uma URL.');
+            setFormError('A imagem precisa ser uma URL válida.');
+            return;
         }
 
-        const tagsArray = tags.split(',').map((tag) => tag.trim().toLowerCase());
+        const tagsArray = tags.split(',')
+            .map((tag) => tag.trim())
+            .filter(tag => tag !== '');
 
-        if (!title || !image || !tags || !body) {
+        if (!title || !image || !body || tagsArray.length === 0) {
             setFormError('Por favor, preencha todos os campos!');
             return;
         }
-        console.log({
+
+        const post = {
             title,
             image,
             body,
             tags: tagsArray,
             uid: user.uid,
-            createdBy: user.displayName,
-        });
+            createdBy: user.displayName || user.email,
+            createdAt: serverTimestamp() // Usando timestamp correto
+        };
 
-        insertDocument({
-            title,
-            image,
-            body,
-            tags: tagsArray,
-            uid: user.uid,
-            createdBy: user.displayName,
-        });
+        await insertDocument(post);
 
+        if (!response.error) {
+            navigate('/dashboard');
+        }
+    };
 
-        navigate('/');
-    }
     return (
         <div className="create-post">
             <h2>Criar Post</h2>

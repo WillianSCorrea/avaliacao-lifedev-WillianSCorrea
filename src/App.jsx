@@ -17,6 +17,8 @@ import Register from './pages/Register/Register'
 import CreatePost from './pages/CreatePost/CreatePost'
 import EditPost from './pages/EditPost/EditPost'
 import Dashboard from './pages/Dashboard/Dashboard'
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
+
 
 import { AuthProvider } from './context/AuthContext'
 
@@ -52,6 +54,7 @@ function App() {
               <Route path="/posts/edit/:id" element={user ? <EditPost /> : <Navigate to={"/login"}/>} />
               <Route path="/dashboard" element={user ? <Dashboard /> : <Navigate to="/login"/>} />
               <Route path="/search" element={<Navigate to="/" />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
 
             </Routes>
           </div>
