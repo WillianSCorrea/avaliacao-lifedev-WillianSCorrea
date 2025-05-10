@@ -4,13 +4,13 @@ import { getFirestore } from "firebase/firestore"
 import { getAuth } from "firebase/auth"
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBhIHroRwkyFgEdJ8Vrv_NgTkmVzWcAlv4",
-    authDomain: "lifedev-victormatos.firebaseapp.com",
-    projectId: "lifedev-victormatos",
-    storageBucket: "lifedev-victormatos.firebasestorage.app",
-    messagingSenderId: "477029159153",
-    appId: "1:477029159153:web:9cd1f6f30b69f9fd321950",
-    measurementId: "G-GB2W6B8PCP"
+  apiKey: "AIzaSyDhHD-cVQY2k4_BgbPuRU5hjGskUAI6paY",
+  authDomain: "lifedev-1932.firebaseapp.com",
+  projectId: "lifedev-1932",
+  storageBucket: "lifedev-1932.firebasestorage.app",
+  messagingSenderId: "788682763182",
+  appId: "1:788682763182:web:f71eec46396a1d031fb63f",
+  measurementId: "G-LRMYWB3D2R"
 };
 
 const app = initializeApp(firebaseConfig)
