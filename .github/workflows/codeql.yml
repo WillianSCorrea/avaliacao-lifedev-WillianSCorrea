@@ -50,3 +50,13 @@ jobs:
       uses: github/codeql-action/analyze@v3
       with:
         category: "/language:${{matrix.language}}"
+
+
+disable-default-queries: false
+paths-ignore:
+  - "dist/**"
+  - "build/**"
+queries:
+  - uses: security-and-quality
+    with:
+      filters: react
