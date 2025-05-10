@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuthValue } from '../../context/AuthContext';
 import { useFetchDocuments } from '../../hooks/useFetchDocuments';
 import { useDeleteDocument } from '../../hooks/useDeleteDocument';
-
+import { UserStats } from '../../components/UserStats';
 const Dashboard = () => {
     const { user } = useAuthValue();
     const { documents: posts, loading } = useFetchDocuments("posts", null, user?.uid);
@@ -15,9 +15,11 @@ const Dashboard = () => {
 
     return (
         <div className={styles.dashboard}>
+            <h3 className=""><span>Bem-vindo </span>, {user.displayName || user.email}!</h3>
             <h2>Dashboard</h2>
+            <UserStats />
             <p>Gerencie seus posts</p>
-            
+
             {!posts || posts.length === 0 ? (
                 <div className={styles.no_posts}>
                     <p>Nenhum post encontrado</p>
@@ -31,7 +33,7 @@ const Dashboard = () => {
                         <span>Título</span>
                         <span>Ações</span>
                     </div>
-                    
+
                     {posts.map((post) => (
                         <div className={styles.post_row} key={post.id}>
                             <h3>{post.title}</h3>
@@ -41,14 +43,14 @@ const Dashboard = () => {
                                 </small>
                             )}
                             <div className={styles.actions}>
-                                <Link 
-                                    to={`/posts/${post.id}`} 
+                                <Link
+                                    to={`/posts/${post.id}`}
                                     className={`${styles.btn} ${styles.btn_outline}`}
                                 >
                                     Ver
                                 </Link>
-                                <Link 
-                                    to={`/posts/edit/${post.id}`} 
+                                <Link
+                                    to={`/posts/edit/${post.id}`}
                                     className={`${styles.btn} ${styles.btn_primary}`}
                                 >
                                     Editar

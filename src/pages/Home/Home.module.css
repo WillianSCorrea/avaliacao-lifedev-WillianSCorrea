@@ -29,3 +29,94 @@
   .noposts a {
     padding: 10px 25px;
   }
+
+  /* Container principal */
+.home {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Título */
+.home h1 {
+  font-size: 2.2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+  position: relative;
+  padding-bottom: 0.5rem;
+}
+
+.home h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(to right, #3498db, #9b59b6);
+}
+
+/* Mensagem de login */
+.login_message {
+  background: #e3f2fd;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem auto 2rem;
+  max-width: 600px;
+  text-align: center;
+  border-left: 4px solid #3498db;
+}
+
+.login_message p {
+  margin: 0;
+  color: #2c3e50;
+}
+
+.login_message a {
+  color: #3498db;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.login_message a:hover {
+  text-decoration: underline;
+}
+
+/* Lista de posts */
+.post_list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.post_wrapper {
+  transition: transform 0.2s ease;
+}
+
+.post_wrapper:hover {
+  transform: translateY(-5px);
+}
+
+/* Estados */
+.loading {
+  text-align: center;
+  grid-column: 1 / -1;
+  padding: 2rem;
+  color: #7f8c8d;
+}
+
+.noposts {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.noposts p {
+  margin-bottom: 1rem;
+  color: #7f8c8d;
+}

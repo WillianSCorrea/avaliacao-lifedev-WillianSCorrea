@@ -3,26 +3,27 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useFetchDocuments } from '../../hooks/useFetchDocuments';
 import { PostCard } from '../../components/PostDetail/PostCard';
+import { useAuthValue } from '../../context/AuthContext';
 
 const Home = () => {
+  const { user } = useAuthValue();
   const { documents: posts, loading } = useFetchDocuments('posts');
   const [query, setQuery] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (query) {
       return navigate(`/search?q=${query}`);
     }
   };
 
-  console.log(loading);
-  console.log(posts);
-
   return (
     <div className={styles.home}>
       <h1>Veja os posts mais recentes</h1>
+
+     
+
       <form className={styles.search_form} onSubmit={handleSubmit}>
         <input
           type="text"
@@ -31,14 +32,22 @@ const Home = () => {
         />
         <button className="btn btn-dark">Pesquisar</button>
       </form>
+
       <div className={styles.post_list}>
-        {loading && <p>Carregando...</p>}
+        {loading && <p className={styles.loading}>Carregando...</p>}
         {posts &&
           posts.map((post) => (
-            <Link to={`/posts/${post.id}`} key={post.id}>
-              <PostCard post={post} />
-            </Link>
+            <div key={post.id} className={styles.post_wrapper}>
+              <Link to={`/posts/${post.id}`}>
+                <PostCard post={post} />
+              </Link>
+            </div>
           ))}
+        {!user && (
+          <div className={styles.login_message}>
+            <p>Para interagir com os posts, faça <Link to="/login">login</Link> ou <Link to="/register">cadastre-se</Link></p>
+          </div>
+        )}
         {posts && posts.length === 0 && (
           <div className={styles.noposts}>
             <p>Não foram encontrados posts</p>

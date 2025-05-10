@@ -1,6 +1,6 @@
 
 
-    import "./CreatePost.module.css";
+import "./CreatePost.module.css";
 import { useState } from 'react';
 import { useAuthValue } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
@@ -8,14 +8,14 @@ import { useInsertDocument } from '../../hooks/useInsertDocument';
 import { serverTimestamp } from 'firebase/firestore'; // Importe aqui
 
 const CreatePost = () => {
-    const[title, setTitle] = useState('');
-    const[image, setImage] = useState('');
-    const[body, setBody] = useState('');
-    const[tags, setTags] = useState([]);
-    const[formError, setFormError] = useState('');
-    const{user} = useAuthValue();
+    const [title, setTitle] = useState('');
+    const [image, setImage] = useState('');
+    const [body, setBody] = useState('');
+    const [tags, setTags] = useState([]);
+    const [formError, setFormError] = useState('');
+    const { user } = useAuthValue();
     const navigate = useNavigate();
-    const{insertDocument, response} = useInsertDocument('posts');
+    const { insertDocument, response } = useInsertDocument('posts');
 
 
     const handleSubmit = async (e) => {
@@ -110,8 +110,9 @@ const CreatePost = () => {
                     <button className="btn" disabled>Aguarde...</button>
                 )}
                 {(response.error || formError) && (<p className="error">{response.error || formError}</p>
-            )}
+                )}
             </form>
         </div>
-    )}
-    export default CreatePost;
+    )
+}
+export default CreatePost;

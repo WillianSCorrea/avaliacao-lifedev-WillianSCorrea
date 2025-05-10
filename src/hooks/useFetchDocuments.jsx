@@ -1,12 +1,12 @@
 // hooks/useFetchDocuments.js
 import { useState, useEffect } from "react";
 import { db } from "../firebase/config";
-import { 
-  collection, 
-  query, 
-  orderBy, 
-  onSnapshot, 
-  where 
+import {
+  collection,
+  query,
+  orderBy,
+  onSnapshot,
+  where
 } from "firebase/firestore";
 
 export const useFetchDocuments = (docCollection, search = null, uid = null) => {
@@ -17,7 +17,7 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      
+
       try {
         let q;
         const collectionRef = collection(db, docCollection);
@@ -29,7 +29,7 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
             where("uid", "==", uid),
             orderBy("createdAt", "desc")
           );
-        } 
+        }
         // Consulta para Home (todos os posts)
         else {
           q = query(
@@ -39,9 +39,11 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
         }
 
         const unsubscribe = onSnapshot(q, (querySnapshot) => {
+
           const results = querySnapshot.docs.map((doc) => ({
             id: doc.id,
             ...doc.data(),
+            createdAt: doc.data().createdAt // Garanta que isso está incluído
           }));
           setDocuments(results);
           setLoading(false);

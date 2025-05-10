@@ -2,7 +2,7 @@ name: "Injection Code React BOT icoma.com pipeline code review"
 
 on:
   push:
-    branches: [ "avaliacaodw-WillianSCorrea" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
   schedule:
@@ -50,5 +50,3 @@ jobs:
       uses: github/codeql-action/analyze@v3
       with:
         category: "/language:${{matrix.language}}"
-
-

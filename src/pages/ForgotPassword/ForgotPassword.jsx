@@ -15,7 +15,7 @@ export const ForgotPassword = () => {
     setIsLoading(true);
     setError('');
     setMessage('');
-    
+
     try {
       await sendPasswordResetEmail(auth, email);
       setMessage('✔️ Email enviado! Verifique sua caixa de entrada.');
@@ -41,10 +41,10 @@ export const ForgotPassword = () => {
           {isLoading ? 'Enviando...' : 'Enviar Link'}
         </button>
       </form>
-      
+
       {message && <p className="success-message">{message}</p>}
       {error && <p className="error-message">{error}</p>}
-      
+
       <div className="links">
         <Link to="/login">Voltar ao Login</Link>
       </div>

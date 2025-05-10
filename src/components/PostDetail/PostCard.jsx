@@ -7,7 +7,7 @@ export const PostCard = ({ post }) => {
     <div className={styles.postDetail}>
       <h3>{post.title}</h3>
 
-      {/* Renderização condicional da imagem */}
+
       {post.image && (
         <img
           src={post.image}
@@ -18,10 +18,9 @@ export const PostCard = ({ post }) => {
           }}
         />
       )}
-
+      <p>Publicado por: <strong>{post.createdBy}</strong></p>
       <p className={styles.postBody}>{post.body}</p>
 
-      {/* Renderização segura das tags */}
       <div className={styles.tags}>
         {post.tags?.map((tag, index) => (
           <span key={index} className={styles.tag}>
