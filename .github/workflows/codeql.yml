@@ -52,7 +52,3 @@ jobs:
         category: "/language:${{matrix.language}}"
 
 
-
-paths-ignore:
-  - "dist/**"
-  
