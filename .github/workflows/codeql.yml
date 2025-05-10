@@ -2,9 +2,9 @@ name: "Injection Code React BOT icoma.com pipeline code review"
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "avaliacaodw-WillianSCorrea" , "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "avaliacaodw-WillianSCorrea" , "main" ]
   schedule:
     - cron: '31 5 * * 5'
 
