@@ -143,8 +143,10 @@ Implemente as seguintes **rotas** usando `react-router-dom`:
 
 Você deve entregar:
 
-1. **Link da Branch** `avaliacaodw-seulogindogithub`
-2. **Link do Deploy Funcionando** para teste público
+1. **Link da Branch** `avaliacaodw-seulogindogithub`    
+https://github.com/WillianSCorrea/avaliacao-lifedev-WillianSCorrea/tree/avaliacaodw-WillianSCorrea
+2. **Link do Deploy Funcionando** para teste público  
+https://lifedev-1932--pr1-avaliacaodw-willians-3dnoan1b.web.app/
 3. **Pipeline CodeQL** rodando no GitHub Actions
 
 ---
